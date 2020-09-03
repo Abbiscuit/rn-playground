@@ -9,6 +9,7 @@ import {
 import { AppLoading } from 'expo';
 
 import HomeStack from './routes/homeStack';
+import TabBar from './routes/tabNavigation';
 
 export default function App() {
   // フォントを設定
@@ -22,5 +23,8 @@ export default function App() {
   }
 
   // React Navigationをここでreturn
-  return <HomeStack />;
+  // return <HomeStack />;
+
+  // TabBarの場合
+  return <TabBar />;
 }
