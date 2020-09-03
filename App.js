@@ -8,7 +8,6 @@ import {
 // こちらもimportしておく
 import { AppLoading } from 'expo';
 
-import HomeStack from './routes/homeStack';
 import TabBar from './routes/tabNavigation';
 
 export default function App() {

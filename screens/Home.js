@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View, Button, FlatList, TouchableOpacity } from 'react-native';
 import { globalStyles } from '../styles/global';
+import Card from '../components/Card';
 
 const Home = ({ navigation }) => {
   const [reviews, setReviews] = useState([
@@ -33,7 +34,9 @@ const Home = ({ navigation }) => {
             // 第2パラメータにオブジェクトを渡せる。この場合、itemそのまま渡す
             onPress={() => navigation.navigate('ReviewDetails', { item })}
           >
-            <Text style={globalStyles.titleText}>{item.title}</Text>
+            <Card>
+              <Text style={globalStyles.titleText}>{item.title}</Text>
+            </Card>
           </TouchableOpacity>
         )}
       />
