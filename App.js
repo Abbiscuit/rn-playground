@@ -8,7 +8,7 @@ import {
 // こちらもimportしておく
 import { AppLoading } from 'expo';
 
-import Home from './screens/Home';
+import HomeStack from './routes/homeStack';
 
 export default function App() {
   // フォントを設定
@@ -21,5 +21,6 @@ export default function App() {
     return <AppLoading />;
   }
 
-  return <Home />;
+  // React Navigationをここでreturn
+  return <HomeStack />;
 }
