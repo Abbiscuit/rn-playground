@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import {
   Text,
   View,
-  Button,
   FlatList,
   TouchableOpacity,
   Modal,
   StyleSheet,
-  SafeAreaView,
+  Keyboard,
+  TouchableNativeFeedback,
 } from 'react-native';
 import { globalStyles } from '../styles/global';
 import { MaterialIcons } from '@expo/vector-icons';
 import Card from '../components/Card';
+import ReviewForm from './ReviewForm';
 
 const Home = ({ navigation }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -36,20 +37,32 @@ const Home = ({ navigation }) => {
     },
   ]);
 
+  const addReview = review => {
+    // Not best way. For practice reason.
+    review.key = Math.random().toString();
+    setReviews(currentReviews => {
+      return [review, ...currentReviews];
+    });
+
+    setModalOpen(false);
+  };
+
   return (
     <View style={globalStyles.container}>
       <Modal visible={modalOpen} animationType="slide">
-        <View style={styles.modalContent}>
-          <MaterialIcons
-            name="close"
-            size={24}
-            onPress={() => setModalOpen(false)}
-            // 複数のスタイルを当てられる
-            style={{ ...styles.modalToggle, ...styles.modalClose }}
-          />
+        <TouchableNativeFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.modalContent}>
+            <MaterialIcons
+              name="close"
+              size={24}
+              onPress={() => setModalOpen(false)}
+              // 複数のスタイルを当てられる
+              style={{ ...styles.modalToggle, ...styles.modalClose }}
+            />
 
-          <Text>Hello form the modal :)</Text>
-        </View>
+            <ReviewForm addReview={addReview} />
+          </View>
+        </TouchableNativeFeedback>
       </Modal>
 
       <MaterialIcons
