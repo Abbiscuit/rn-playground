@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
-import { Text, View, Button, FlatList, TouchableOpacity } from 'react-native';
+import {
+  Text,
+  View,
+  Button,
+  FlatList,
+  TouchableOpacity,
+  Modal,
+  StyleSheet,
+  SafeAreaView,
+} from 'react-native';
 import { globalStyles } from '../styles/global';
+import { MaterialIcons } from '@expo/vector-icons';
 import Card from '../components/Card';
 
 const Home = ({ navigation }) => {
+  const [modalOpen, setModalOpen] = useState(false);
   const [reviews, setReviews] = useState([
     {
       title: 'Zelda, Breath of Fresh Air',
@@ -27,6 +38,27 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={globalStyles.container}>
+      <Modal visible={modalOpen} animationType="slide">
+        <View style={styles.modalContent}>
+          <MaterialIcons
+            name="close"
+            size={24}
+            onPress={() => setModalOpen(false)}
+            // 複数のスタイルを当てられる
+            style={{ ...styles.modalToggle, ...styles.modalClose }}
+          />
+
+          <Text>Hello form the modal :)</Text>
+        </View>
+      </Modal>
+
+      <MaterialIcons
+        style={styles.modalToggle}
+        name="add"
+        size={24}
+        onPress={() => setModalOpen(true)}
+      />
+
       <FlatList
         data={reviews}
         renderItem={({ item }) => (
@@ -45,3 +77,18 @@ const Home = ({ navigation }) => {
 };
 
 export default Home;
+
+const styles = StyleSheet.create({
+  modalContent: {
+    flex: 1,
+  },
+  modalToggle: {
+    marginBottom: 10,
+    padding: 10,
+    alignSelf: 'center',
+  },
+  modalClose: {
+    marginTop: 50,
+    marginBottom: 0,
+  },
+});

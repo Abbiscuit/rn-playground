@@ -7,7 +7,6 @@ const LottieAnimation = () => {
       source={require('../assets/lottie-programming.json')}
       autoPlay
       speed={1.5}
-      onAnimationFinish
     />
   );
 };
